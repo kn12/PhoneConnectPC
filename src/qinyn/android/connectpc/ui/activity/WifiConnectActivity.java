@@ -98,11 +98,6 @@ public class WifiConnectActivity extends BaseFragmentActivity {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	protected void onDestroy() {
-		stop();
-		super.onDestroy();
-	}
+	
 
 }
