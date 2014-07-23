@@ -11,24 +11,25 @@
         android:gravity="center"
         android:textSize="23dp" />
 
-    <EditText
-        android:id="@+id/edt_port"
-        android:maxLength="4"
-        android:layout_width="match_parent"
-        android:numeric="integer"
-        android:hint="请输入端口号,默认5554"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btn_connect"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="点击连接WiFi" />
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/btn_stop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="点击关闭WiFi" />
+        <EditText
+            android:id="@+id/edt_port"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="请输入端口号,默认5554"
+            android:maxLength="4"
+            android:numeric="integer" />
+
+        <ToggleButton
+            android:id="@+id/tgb_connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+    </LinearLayout>
 
 </LinearLayout>

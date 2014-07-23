@@ -7,10 +7,13 @@ import qinyn.android.connectpc.R;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 import custom.utils.NetUtil;
+import custom.utils.SharedPreferenceUtils;
 
 /**
  * @author evan.qin
@@ -18,6 +21,9 @@ import custom.utils.NetUtil;
  */
 public class WifiConnectActivity extends BaseFragmentActivity {
 
+	private String pName;
+	private String key;
+	private boolean defaultValue = false;
 	private EditText edt_port;
 
 	@Override
@@ -27,38 +33,39 @@ public class WifiConnectActivity extends BaseFragmentActivity {
 
 	@Override
 	protected void onContentView() {
-		Button btn_start = (Button) findViewById(R.id.btn_connect);
-		Button btn_stop = (Button) findViewById(R.id.btn_stop);
 		TextView tv = (TextView) findViewById(R.id.tv_ip);
-		edt_port = (EditText) findViewById(R.id.edt_port);
 		String s = NetUtil.getLocalHostIp();
 		tv.setText("当前手机ip为： " + s);
-		btn_start.setOnClickListener(onClickListener);
-		btn_stop.setOnClickListener(onClickListener);
+
+		edt_port = (EditText) findViewById(R.id.edt_port);
+		ToggleButton tgb_connect = (ToggleButton) findViewById(R.id.tgb_connect);
+		tgb_connect.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				init(isChecked);
+			}
+		});
+
+		boolean isOn = SharedPreferenceUtils.getPreference(pName, key,
+				defaultValue);
+		tgb_connect.setChecked(isOn);
+		init(tgb_connect.isChecked());
+
 	}
 
-	private OnClickListener onClickListener = new OnClickListener() {
-
-		@Override
-		public void onClick(View v) {
-			int id = v.getId();
-			switch (id) {
-			case R.id.btn_connect:
-				String s = edt_port.getText().toString();
-				if (TextUtils.isEmpty(s)) {
-					s = "5554";
-				}
-				start(s);
-				break;
-			case R.id.btn_stop:
-				stop();
-				break;
-			default:
-				break;
+	private void init(boolean isOn) {
+		if (isOn) {
+			String s = edt_port.getText().toString();
+			if (TextUtils.isEmpty(s)) {
+				s = "5554";
 			}
+			start(s);
+		} else {
+			stop();
 		}
-
-	};
+	}
 
 	private void start(String port) {
 		Process localProcess;
@@ -98,6 +105,5 @@ public class WifiConnectActivity extends BaseFragmentActivity {
 			e.printStackTrace();
 		}
 	}
-	
 
 }
