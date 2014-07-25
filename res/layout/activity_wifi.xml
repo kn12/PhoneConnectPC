@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="23dp" />
+        android:textSize="22sp" />
 
     <EditText
         android:id="@+id/edt_port"
