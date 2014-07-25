@@ -19,20 +19,7 @@ public class DrawingActivity extends BaseFragmentActivity {
 		currentBrush = new PenBrush();
 	}
 
-	public boolean onTouch(View view, MotionEvent motionEvent) {
-//		if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-//			currentBrush.mouseDown(currentDrawingPath.path, motionEvent.getX(),
-//					motionEvent.getY());
-//		} else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-//			currentBrush.mouseMove(currentDrawingPath.path, motionEvent.getX(),
-//					motionEvent.getY());
-//		} else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-//			currentBrush.mouseUp(currentDrawingPath.path, motionEvent.getX(),
-//					motionEvent.getY());
-//			drawingSurface.isDrawing = true;
-//		}
-		return true;
-	}
+	
 
 	private OnClickListener onClickListener = new OnClickListener() {
 
